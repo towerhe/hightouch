@@ -1,0 +1,8 @@
+- blog_posting = data.blog.blog_posting(current_path)
+
+.article
+  %h1= blog_posting.name
+  %h3
+    %span.author= blog_posting.author
+    %span.date-created= blog_posting.date_created
+  .article-body= blog_posting.article_body

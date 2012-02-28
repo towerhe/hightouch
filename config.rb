@@ -11,6 +11,8 @@ set :markdown_engine, :redcarpet
 
 require 'rygments'
 require 'rack/codehighlighter'
+page "/blog/*", layout: :articles
+
 
 use Rack::Codehighlighter,
   :pygments,
