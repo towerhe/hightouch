@@ -31,6 +31,11 @@ module Hightouch
           @blog_postings[path] = Hightouch::Blog::BlogPosting.new(page)
         end
       end
+
+      def blog_posting(path)
+        path.sub!(/^\//, "")
+        @blog_postings[path]
+      end
     end
   end
 end
