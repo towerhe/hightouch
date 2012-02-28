@@ -13,9 +13,8 @@
     = javascript_include_tag  "all"
 
   %body{ class: page_classes }
-    #content
-      .article
-        = yield
+    .content
+      .main= yield
       = partial "partials/sidebar"
       = partial "partials/bottombar"
 
