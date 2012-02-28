@@ -1,0 +1,4 @@
+- data.blog.blog_postings.each do |url, blog_posting|
+  %h1=link_to blog_posting.name, blog_posting.url
+  %time= blog_posting.date_created
+  %div= blog_posting.article_body

@@ -1,0 +1,4 @@
+.mm-pid*
+.rvmrc
+.sass-cache/
+build/

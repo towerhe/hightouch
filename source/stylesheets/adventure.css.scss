@@ -1,0 +1,131 @@
+/*
+ * = require pygments-github
+ */
+@charset "utf-8";
+
+body {
+  background: fixed center center url("../images/adventure/background.jpg") black;
+  font-family: sans-serif; 
+  font-size: 13px;
+}
+
+pre {
+  background: #eee;
+  border: 1px solid #ccc;
+  padding: 12px 12px 0px 12px;
+  white-space: pre-wrap;
+}
+
+li {
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+
+#content {
+  width: 1000px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+#sidebar {
+  text-shadow: 0 0 4px #444;
+  color: white;
+  font-size: 14px;
+  background: url("../images/adventure/blacktrans.png");
+  -moz-border-radius: 6px;
+  -khtml-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  width: 200px;
+  padding: 10px;
+  float: right;
+  text-align: left;
+}
+
+#bottombar {
+  background: url("../images/adventure/bars.png");
+  width: 100%;
+  height: 50px;
+  position: fixed;
+  text-align: left;
+  bottom: 0;
+  left: 0;
+  ul {
+    float: right;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    font-weight: bold;
+    display: block;
+    text-align: left;
+    li {
+      font-size: 14px;
+      font-weight: bold;
+      font-family: sans-serif;
+      font-variant: small-caps;
+      float: left;
+      border-left: 1px solid #575253;
+      a {
+        line-height: 50px;
+        height: 50px;
+        display: block;
+        padding: 0px 12px 0px 12px;
+        color: white;
+        text-decoration: none;
+        &:hover {
+          background-color: #0B6492;
+          background-position: bottom;
+          color: white;
+        }
+      }
+    }
+  }
+  .title {
+    color: white;
+    float: left;
+    padding: 0px;
+    margin: 0 0 14px 14px;
+    h1 {
+      font-size: 20px;
+      font-weight: bold;
+      font-variant: small-caps;
+      a {
+        text-decoration: none;
+        background-position: bottom;
+        color: white
+      }
+    }
+  }
+  .slogan {
+    padding: 0px;
+    float: left;
+    margin: 8px 0 18px 14px;
+    h2 {
+      font-size: 15px;
+      padding: 0px;
+      font-variant: small-caps;
+      font-weight: 100;
+      text-decoration: none;
+      color: #B7C2C3;
+    }
+  }
+}
+
+.article {
+  background: url("../images/adventure/article_bg.png");
+  font-family: sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  width: 740px;
+  height: auto;
+  padding: 10px;
+  margin-bottom: 75px;
+  text-align: left;
+  border: 3px solid #4A4646;
+  -moz-border-radius: 6px;
+  -khtml-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  float: left;
+  border-image: initial;
+}
