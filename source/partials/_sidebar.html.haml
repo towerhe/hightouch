@@ -9,4 +9,4 @@
       %h2 Tags
       %div
         - blog.tags.each do |k, v|
-          =link_to k, "/blog/tags/#{k}.html"
+          =link_to k, "/blog/tags/#{k}.html", style: "font-size: #{font_size_for_tag(v)}px;"
