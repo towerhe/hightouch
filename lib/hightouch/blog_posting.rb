@@ -29,14 +29,14 @@ module Hightouch
 
         @name = page.data.title
 
-        update_categories(page.data.categories) if page.data.categories
-        update_tags(page.data.tags) if page.data.tags
-
         @date_created = Date.strptime(page.data.date_created, '%Y/%m/%d') if page.data.date_created
         @author = page.data.author
         @url = '/' + page.path
         @description = page.data.description
         @raw = app.frontmatter(path).last
+
+        update_categories(page.data.categories) if page.data.categories
+        update_tags(page.data.tags) if page.data.tags
 
         @article_body = nil
       end
