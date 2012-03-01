@@ -1,4 +1,5 @@
-%span Tags: 
+%span
+  %label Tags: 
 %span
   - tag_links = tags.inject([]) do |c, t|
     - c << link_to(t, "/blog/tags/#{t}.html")

@@ -1,8 +1,12 @@
 .blog-posting
   %h1=link_to titleize(humanize(blog_posting.name)), blog_posting.url
   %p
-    %span.author= "Created by: #{blog_posting.author}"
-    %span.date-created= "Published on: #{blog_posting.date_created}"
+    %span.author
+      %label Created by: 
+      = blog_posting.author
+    %span.date-created
+      %label Published on: 
+      = blog_posting.date_created
   %div= blog_posting.description
   %div
     .left=link_to 'READ MORE', blog_posting.url
