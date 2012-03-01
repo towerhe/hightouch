@@ -2,13 +2,13 @@ module Hightouch
   module Blog
     class << self
       def registered(app)
+        app.helpers HelperMethods
+        app.helpers ActiveSupport::Inflector
+
         app.after_configuration do
-          def data.blog; @blog ||= Blog.new; end
-
           frontmatter_changed /blog\/(\d{4})\/(\d{2})\/(\d{2})\/(.*)\.html/ do |file|
-            data.blog.touch_blog_posting(self.sitemap.page(self.sitemap.file_to_path(file)))
+            blog.touch_blog_posting(self.sitemap.page(self.sitemap.file_to_path(file)))
           end
-
         end
       end
 
@@ -16,9 +16,10 @@ module Hightouch
     end
 
     class Blog
-      attr_reader :blog_postings
+      attr_reader :categories, :blog_postings
 
       def initialize
+        @categories = {}
         @blog_postings = {}
       end
 
@@ -27,14 +28,38 @@ module Hightouch
 
         if blog_postings.has_key?(path)
           @blog_postings[path].update
+
+          # TODO Update categories
         else
-          @blog_postings[path] = Hightouch::Blog::BlogPosting.new(page)
+          blog_posting = Hightouch::Blog::BlogPosting.new(page)
+          @blog_postings[path] = blog_posting
+          add_to_categories(blog_posting)
         end
       end
 
       def blog_posting(path)
         path.sub!(/^\//, "")
         @blog_postings[path]
+      end
+
+      private
+      def add_to_categories(blog_posting)
+        blog_posting.categories.each do |c|
+          category = categories[c]
+
+          unless category
+            categories[c] = Category.new(c)
+            category = categories[c]
+          end
+
+          category.add_blog_posting(blog_posting)
+        end
+      end
+    end
+
+    module HelperMethods
+      def blog
+        @blog ||= Blog.new
       end
     end
   end

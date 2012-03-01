@@ -2,7 +2,7 @@ module Hightouch
   module Blog
     class BlogPosting
       DESC_SEPARATOR = /READMORE/
-      attr_reader :name, :url, :description, :keywords
+      attr_reader :name, :url, :description, :keywords, :categories
 
       # TODO Create a class Person
       attr_reader :author
@@ -23,6 +23,7 @@ module Hightouch
 
         @name = page.data.title
         @keywords = page.data.keywords.split(/\s+, \s+/) if page.data.keywords
+        @categories = page.data.categories
         @date_created = Date.strptime(page.data.date_created, '%Y/%m/%d') if page.data.date_created
         @author = page.data.author
         @url = '/' + page.path

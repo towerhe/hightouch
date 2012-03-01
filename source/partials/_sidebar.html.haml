@@ -1,2 +1,7 @@
 .sidebar
-  This is a sidebar
+  %ul
+    %li
+      %h2 Categories
+      %ul
+        - blog.categories.each do |k, v|
+          %li=link_to titleize(humanize(k)), "/blog/#{k}.html"
