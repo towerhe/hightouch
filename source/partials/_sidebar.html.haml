@@ -4,9 +4,9 @@
       %h2 Categories
       %ul
         - blog.categories.each do |k, v|
-          %li=link_to titleize(humanize(k)), "/blog/#{k}.html"
+          %li=link_to "#{titleize(humanize(k))} (#{v.count})", "/blog/#{k}.html"
     %li
       %h2 Tags
       %div
         - blog.tags.each do |k, v|
-          =link_to k, "/blog/tags/#{k}.html", style: "font-size: #{font_size_for_tag(v)}px;"
+          =link_to k, "/blog/tags/#{k}.html", style: "font-size: #{font_size_for_tag(v)}px;", title: "#{v.count} blog posting#{"s" if v.count > 1}"
