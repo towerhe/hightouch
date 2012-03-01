@@ -21,9 +21,5 @@ use Rack::Codehighlighter,
 configure :build do; end
 
 ready do
-  blog.categories.each do |k, v|
-    page "/blog/#{k}.html", proxy: "/blog/category.html", ignore: true do
-      @category_name = k
-    end
-  end
+  blog.generate_category_pages
 end

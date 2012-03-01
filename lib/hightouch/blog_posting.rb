@@ -2,6 +2,8 @@ module Hightouch
   module Blog
     class BlogPosting
       DESC_SEPARATOR = /READMORE/
+      attr_reader :blog
+
       attr_reader :name, :url, :description, :keywords, :categories
 
       # TODO Create a class Person
@@ -11,8 +13,11 @@ module Hightouch
 
       attr_reader :raw, :page
 
-      def initialize(page)
+      def initialize(page, blog)
+        @blog = blog
         @page = page
+
+        @categories = []
 
         update
       end
@@ -23,7 +28,9 @@ module Hightouch
 
         @name = page.data.title
         @keywords = page.data.keywords.split(/\s+, \s+/) if page.data.keywords
-        @categories = page.data.categories
+
+        update_categories(page.data.categories)
+
         @date_created = Date.strptime(page.data.date_created, '%Y/%m/%d') if page.data.date_created
         @author = page.data.author
         @url = '/' + page.path
@@ -51,6 +58,30 @@ module Hightouch
                            engine.render
                          end
 
+      end
+
+      private
+      def update_categories(updated)
+        add_to_categories(updated - @categories)
+        remove_from_categories(@categories - updated)
+        
+        @categories = updated
+      end
+
+      def add_to_categories(added)
+        added.each do |c|
+          category = blog.has_category?(c) ? blog.find_category(c) : Category.new(c, blog)
+
+          category.add_blog_posting(self)
+        end
+      end
+
+      def remove_from_categories(removed)
+        removed.each do |c|
+          category = blog.find_category(c)
+
+          category.remove_blog_posting(self) if category
+        end
       end
     end
   end
