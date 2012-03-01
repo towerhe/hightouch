@@ -1,8 +1,2 @@
 - blog.blog_postings.each do |url, blog_posting|
-  .article
-    %h1=link_to titleize(humanize(blog_posting.name)), blog_posting.url
-    %p
-      %span.author= "Created by: #{blog_posting.author}"
-      %span.date-created= "Published on: #{blog_posting.date_created}"
-    %div= blog_posting.description
-    %div=link_to 'READ MORE', blog_posting.url
+  = partial "partials/blog_posting_summary", locals: { blog_posting: blog_posting }
