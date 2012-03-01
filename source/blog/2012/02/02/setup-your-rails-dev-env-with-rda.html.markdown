@@ -1,6 +1,7 @@
 ---
 title: Setup your rails development environment with RDA
 author: Tower He
+categories: [programming]
 date_created: 2012/02/02
 keywords: ruby, rails
 ---
