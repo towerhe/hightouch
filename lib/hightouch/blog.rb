@@ -77,6 +77,14 @@ module Hightouch
         @tags[tag]
       end
 
+      def max_tag
+        @tags.values.max { |x, y| x.count <=> y.count }
+      end
+
+      def min_tag
+        @tags.values.min { |x, y| x.count <=> y.count }
+      end
+
       def add_tag(tag)
         @tags[tag.name] = tag
         generate_tag_page(tag)
@@ -113,6 +121,22 @@ module Hightouch
     module HelperMethods
       def blog
         @blog ||= Blog.new(self)
+      end
+
+      def font_size_for_tag(tag, opts = {})
+        max_font_size = opts[:max_font_size] || 36
+        min_font_size = opts[:min_font_size] || 11
+
+        max_count = blog.max_tag.count
+        min_count = blog.min_tag.count
+
+        size = begin
+                 if max_count == min_count
+                   min_font_size
+                 else
+                   min_font_size + (max_count - (max_count - (tag.count - min_count))) * (max_font_size - min_font_size).to_f/(max_count - min_count).to_f
+                 end
+               end
       end
     end
   end
