@@ -168,7 +168,12 @@ li {
   }
 }
 
-.main, .article {
+.main {
+  margin-bottom: 75px;
+  float: left;
+}
+
+.article {
   background: url("../images/adventure/article_bg.png");
   font-family: sans-serif;
   font-size: 13px;
@@ -176,13 +181,12 @@ li {
   width: 740px;
   height: auto;
   padding: 10px;
-  margin-bottom: 75px;
   text-align: left;
   border: 3px solid #4A4646;
   -moz-border-radius: 6px;
   -khtml-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
-  float: left;
   border-image: initial;
+  margin-bottom: 20px;
 }

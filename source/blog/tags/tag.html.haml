@@ -1,10 +1,10 @@
 - blog.tags.each do |k, v|
   - if k == @tag_name
     - v.blog_postings.each do |url, p|
-      %h1=link_to titleize(humanize(p.name)), p.url
-      %h3
-        %span.author= "Created by: #{p.author}"
-        %span.date-created= "Published on: #{p.date_created}"
-      %div= p.description
-      %div=link_to 'READ MORE', p.url
-
+      .article
+        %h1=link_to titleize(humanize(p.name)), p.url
+        %p
+          %span.author= "Created by: #{p.author}"
+          %span.date-created= "Published on: #{p.date_created}"
+        %div= p.description
+        %div=link_to 'READ MORE', p.url
