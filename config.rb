@@ -1,7 +1,7 @@
 require 'pry'
 
 require 'lib/hightouch'
-activate :blog
+activate :hightouch
 
 Encoding.default_external = 'utf-8'
 

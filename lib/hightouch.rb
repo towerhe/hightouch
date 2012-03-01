@@ -4,6 +4,4 @@ require 'hightouch/blog_posting'
 require 'hightouch/category'
 require 'hightouch/blog'
 
-Middleman::Extensions.register(:blog) do
-  Hightouch::Blog
-end
+Middleman::Extensions.register(:hightouch) { Hightouch::Blog }
