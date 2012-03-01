@@ -26,5 +26,9 @@ module Hightouch
     def empty?
       blog_postings.empty?
     end
+
+    def count
+      blog_postings.size
+    end
   end
 end
