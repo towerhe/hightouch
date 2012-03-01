@@ -1,7 +1,6 @@
 require 'pry'
 
 require 'lib/hightouch'
-
 activate :blog
 
 Encoding.default_external = 'utf-8'
@@ -13,7 +12,6 @@ require 'rygments'
 require 'rack/codehighlighter'
 page "/blog/*", layout: :articles
 
-
 use Rack::Codehighlighter,
   :pygments,
   element: 'code',
@@ -21,3 +19,11 @@ use Rack::Codehighlighter,
   pattern: /\A:::([-_+\w]+)\s*\n/
 
 configure :build do; end
+
+ready do
+  blog.categories.each do |k, v|
+    page "/blog/#{k}.html", proxy: "/blog/category.html", ignore: true do
+      @category_name = k
+    end
+  end
+end
