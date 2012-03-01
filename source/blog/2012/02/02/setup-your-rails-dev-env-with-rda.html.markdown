@@ -1,7 +1,7 @@
 ---
 title: Setup your rails development environment with RDA
 author: Tower He
-categories: [programming]
+categories: [programming, example]
 tags: [ruby, rails, nginx, passenger, rvm, example]
 date_created: 2012/02/02
 keywords: ruby, rails
