@@ -4,7 +4,7 @@ module Hightouch
       DESC_SEPARATOR = /READMORE/
       attr_reader :blog
 
-      attr_reader :name, :url, :description, :keywords, :categories
+      attr_reader :name, :url, :description, :tags, :categories
 
       # TODO Create a class Person
       attr_reader :author
@@ -18,6 +18,7 @@ module Hightouch
         @page = page
 
         @categories = []
+        @tags = []
 
         update
       end
@@ -27,9 +28,9 @@ module Hightouch
         path = page.source_file.sub(app.source_dir, '')
 
         @name = page.data.title
-        @keywords = page.data.keywords.split(/\s+, \s+/) if page.data.keywords
 
-        update_categories(page.data.categories)
+        update_categories(page.data.categories) if page.data.categories
+        update_tags(page.data.tags) if page.data.tags
 
         @date_created = Date.strptime(page.data.date_created, '%Y/%m/%d') if page.data.date_created
         @author = page.data.author
@@ -81,6 +82,29 @@ module Hightouch
           category = blog.find_category(c)
 
           category.remove_blog_posting(self) if category
+        end
+      end
+
+      def update_tags(updated)
+        add_to_tags(updated - @tags)
+        remove_from_tags(@tags - updated)
+        
+        @tags = updated
+      end
+
+      def add_to_tags(added)
+        added.each do |c|
+          tag = blog.has_tag?(c) ? blog.find_tag(c) : Tag.new(c, blog)
+
+          tag.add_blog_posting(self)
+        end
+      end
+
+      def remove_from_tags(removed)
+        removed.each do |c|
+          tag = blog.find_tag(c)
+
+          tag.remove_blog_posting(self) if tag 
         end
       end
     end

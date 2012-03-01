@@ -22,4 +22,5 @@ configure :build do; end
 
 ready do
   blog.generate_category_pages
+  blog.generate_tag_pages
 end

@@ -16,11 +16,12 @@ module Hightouch
     end
 
     class Blog
-      attr_reader :app, :categories, :blog_postings
+      attr_reader :app, :categories, :tags, :blog_postings
 
       def initialize(app)
         @app = app
         @categories = {}
+        @tags = {}
         @blog_postings = {}
       end
 
@@ -56,6 +57,41 @@ module Hightouch
         key = category.is_a?(String) ? category : category.name
 
         @categories.has_key?(key)
+      end
+
+      # TODO To be refacted
+      def generate_tag_pages
+        @tags.each do |k, v|
+          generate_tag_page(k)
+        end
+      end
+
+      def generate_tag_page(tag)
+        name = tag.is_a?(String) ? tag : tag.name
+        app.page "/blog/tags/#{name}.html", proxy: "/blog/tags/tag.html", ignore: true do
+          @tag_name = name
+        end
+      end
+
+      def find_tag(tag)
+        @tags[tag]
+      end
+
+      def add_tag(tag)
+        @tags[tag.name] = tag
+        generate_tag_page(tag)
+      end
+
+      def remove_tag(tag)
+        key = tag.is_a?(String) ? tag : tag.name
+
+        @tags.delete(key)
+      end
+
+      def has_tag?(tag)
+        key = tag.is_a?(String) ? tag : tag.name
+
+        @tags.has_key?(key)
       end
 
       def touch_blog_posting(page)
