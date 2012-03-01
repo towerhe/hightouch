@@ -1,8 +1,10 @@
 - blog_posting = blog.blog_posting(current_path)
 
-.article
+.blog-posting
   %h1= titleize(humanize(blog_posting.name))
-  %h3
+  %p
     %span.author= "Created by: #{blog_posting.author}"
     %span.date-created= "Published on: #{blog_posting.date_created}"
+  %p
+    = partial "partials/tags", locals: { tags: blog_posting.tags }
   .article-body= blog_posting.article_body

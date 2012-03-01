@@ -10,7 +10,7 @@ set :markdown_engine, :redcarpet
 
 require 'rygments'
 require 'rack/codehighlighter'
-page "/blog/*", layout: :articles
+page "/blog/*", layout: :blog_postings
 
 use Rack::Codehighlighter,
   :pygments,

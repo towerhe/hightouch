@@ -1,6 +1,6 @@
-/*
- * = require pygments-github
- */
+//
+// = require pygments-github
+//
 @charset "utf-8";
 
 body {
@@ -57,6 +57,10 @@ li {
   display: list-item;
   text-align: -webkit-match-parent;
 }
+
+.left { float: left; }
+.right { float: right; }
+.clear { clear: both; }
 
 .content {
   width: 1000px;
@@ -173,8 +177,8 @@ li {
   float: left;
 }
 
-.article, .blog-posting {
-  background: url("../images/adventure/article_bg.png");
+.blog-posting {
+  background: url("../images/adventure/blog_posting_bg.png");
   font-family: sans-serif;
   font-size: 13px;
   line-height: 20px;
