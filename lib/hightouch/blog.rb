@@ -2,6 +2,7 @@ module Hightouch
   class Blog
     include Virtus
 
+    attribute :archives, Hash, default: {}
     attribute :categories, Hash, default: {}
     attribute :tags, Hash, default: {}
     attribute :blog_postings, Hash, default: {}
@@ -12,24 +13,13 @@ module Hightouch
       @app = app
     end
 
-    def create_category(attrs)
-      categories[attrs[:name]] = Category.new(attrs)
+    def create_archive(type, attrs)
+      send(type.name.split(/::/).last.downcase.pluralize.to_sym)[attrs[:name]] = type.new(attrs)
     end
 
-    def remove_category(category)
-      key = category.is_a?(String) ? category : category.name
-
-      categories.delete(key)
-    end
-
-    def create_tag(attrs)
-      tags[attrs[:name]] = Tag.new(attrs)
-    end
-
-    def remove_tag(tag)
-      key = tag.is_a?(String) ? tag : tag.name
-
-      tags.delete(key)
+    def remove_archive(archive)
+      key = archive.name
+      send(archive.class.name.split(/::/).last.downcase.pluralize.to_sym).delete(key)
     end
 
     def touch_blog_posting(page)
