@@ -1,98 +1,45 @@
 module Hightouch
   class Blog
-    attr_reader :app, :categories, :tags, :blog_postings
+    include Virtus
 
-    def initialize(app)
+    attribute :categories, Hash, default: {}
+    attribute :tags, Hash, default: {}
+    attribute :blog_postings, Hash, default: {}
+
+    attr_reader :app
+
+    def initialize(app = nil)
       @app = app
-      @categories = {}
-      @tags = {}
-      @blog_postings = {}
     end
 
-    def generate_category_pages
-      @categories.each do |k, v|
-        generate_category_page(k)
-      end
-    end
-
-    def generate_category_page(category)
-      name = category.is_a?(String) ? category : category.name
-      app.page "/blog/#{name}.html", proxy: "/blog/category.html", ignore: true do
-        @category_name = name
-      end
-    end
-
-    def find_category(category)
-      @categories[category]
-    end
-
-    def add_category(category)
-      @categories[category.name] = category
-      generate_category_page(category)
+    def create_category(attrs)
+      categories[attrs[:name]] = Category.new(attrs)
     end
 
     def remove_category(category)
       key = category.is_a?(String) ? category : category.name
 
-      @categories.delete(key)
+      categories.delete(key)
     end
 
-    def has_category?(category)
-      key = category.is_a?(String) ? category : category.name
-
-      @categories.has_key?(key)
-    end
-
-    # TODO To be refacted
-    def generate_tag_pages
-      @tags.each do |k, v|
-        generate_tag_page(k)
-      end
-    end
-
-    def generate_tag_page(tag)
-      name = tag.is_a?(String) ? tag : tag.name
-      app.page "/blog/tags/#{name}.html", proxy: "/blog/tags/tag.html", ignore: true do
-        @tag_name = name
-      end
-    end
-
-    def find_tag(tag)
-      @tags[tag]
-    end
-
-    def max_tag
-      @tags.values.max { |x, y| x.count <=> y.count }
-    end
-
-    def min_tag
-      @tags.values.min { |x, y| x.count <=> y.count }
-    end
-
-    def add_tag(tag)
-      @tags[tag.name] = tag
-      generate_tag_page(tag)
+    def create_tag(attrs)
+      tags[attrs[:name]] = Tag.new(attrs)
     end
 
     def remove_tag(tag)
       key = tag.is_a?(String) ? tag : tag.name
 
-      @tags.delete(key)
-    end
-
-    def has_tag?(tag)
-      key = tag.is_a?(String) ? tag : tag.name
-
-      @tags.has_key?(key)
+      tags.delete(key)
     end
 
     def touch_blog_posting(page)
-      path = page.path
+      key = page.data.title
+      blog_posting = blog_postings[key]
 
-      if blog_postings.has_key?(path)
-        @blog_postings[path].update
+      if blog_posting
+        blog_posting.update
       else
-        @blog_postings[path] = BlogPosting.new(page, self)
+        blog_postings[key] = BlogPosting.new(page, self)
       end
     end
 

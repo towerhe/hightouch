@@ -1,23 +1,24 @@
 module Hightouch
   class BlogPosting
+    include Virtus
+
     DESC_SEPARATOR = /READMORE/
-    attr_reader :blog
 
-    attr_reader :name, :url, :description, :tags, :categories
+    attribute :blog, Blog
 
-    # TODO Create a class Person
-    attr_reader :author
-
-    attr_reader :date_created, :date_modified, :date_published
+    attribute :name, String
+    attribute :url, String
+    attribute :description, String
+    attribute :author, String
+    attribute :date_created, Date
+    attribute :tags, Hash, default: {}
+    attribute :categories, Hash, default: {}
 
     attr_reader :raw, :page
 
     def initialize(page, blog)
       @blog = blog
       @page = page
-
-      @categories = []
-      @tags = []
 
       update
     end
@@ -34,8 +35,8 @@ module Hightouch
       @description = page.data.description
       @raw = app.frontmatter(path).last
 
-      update_categories(page.data.categories) if page.data.categories
-      update_tags(page.data.tags) if page.data.tags
+      update_association(:categories, page.data.categories) if page.data.categories
+      update_association(:tags, page.data.tags) if page.data.tags
 
       @article_body = nil
     end
@@ -61,26 +62,22 @@ module Hightouch
     end
 
     private
-    def update_categories(updated)
-      add_to_categories(updated - @categories)
-      remove_from_categories(@categories - updated)
-
-      @categories = updated
-    end
-
-    def add_to_categories(added)
-      added.each do |c|
-        category = blog.has_category?(c) ? blog.find_category(c) : Category.new(c, blog)
-
-        category.add_blog_posting(self)
+    def update_association(name, updated)
+      association = send(name)
+      association.each do |k, v|
+        unless updated.include? k
+          association.delete(k).remove_blog_posting(self)
+        end
       end
-    end
 
-    def remove_from_categories(removed)
-      removed.each do |c|
-        category = blog.find_category(c)
+      updated.each do |u|
+        a = association[u]
+        next if a
 
-        category.remove_blog_posting(self) if category
+        a = blog.send(name)[u] || blog.send("create_#{name.to_s.singularize}".to_sym, name: u, blog: blog)
+
+        a.add_blog_posting(self)
+        association[u] = a
       end
     end
 

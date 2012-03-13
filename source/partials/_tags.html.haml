@@ -1,6 +1,6 @@
 %span
   %label Tags: 
 %span
-  - tag_links = tags.inject([]) do |c, t|
-    - c << link_to(t, "/blog/tags/#{t}.html")
+  - tag_links = tags.values.inject([]) do |c, t|
+    - c << link_to(t.name, "/blog/tags/#{t.name}.html")
   =tag_links.join(", ")

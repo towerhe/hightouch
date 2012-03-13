@@ -1,26 +1,18 @@
 module Hightouch
   class Category
-    attr_reader :name, :blog, :blog_postings
+    include Virtus
 
-    def initialize(name, blog)
-      @name = name
-      @blog = blog
-      @blog_postings = {}
-
-      blog.add_category(self)
-    end
+    attribute :name, String
+    attribute :blog, Blog
+    attribute :blog_postings, Hash, default: {}
 
     def add_blog_posting(blog_posting)
-      blog_postings[blog_posting.url] = blog_posting
-
-      self
+      blog_postings[blog_posting.name] = blog_posting
     end
 
     def remove_blog_posting(blog_posting)
-      blog_postings.delete(blog_posting.url)
+      blog_postings.delete(blog_posting.name)
       blog.remove_category(self) if empty?
-
-      self
     end
 
     def empty?
