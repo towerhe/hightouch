@@ -1,7 +1,11 @@
 $LOAD_PATH << File.join(File.dirname(__FILE__))
 
+require 'middleman'
 require 'virtus'
+require 'thor/group'
 
+require 'hightouch/app_generator'
+require 'hightouch/cli'
 require 'hightouch/archive_page_generator'
 
 module Hightouch
