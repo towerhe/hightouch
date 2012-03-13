@@ -1,10 +1,8 @@
 $LOAD_PATH << File.join(File.dirname(__FILE__))
 
-require 'middleman'
 require 'virtus'
 
 require 'hightouch/blog_posting'
-#require 'hightouch/archive'
 require 'hightouch/category'
 require 'hightouch/tag'
 require 'hightouch/blog'
