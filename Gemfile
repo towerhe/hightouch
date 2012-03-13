@@ -8,3 +8,4 @@ gem 'virtus'
 
 gem 'pry'
 gem 'rspec'
+gem 'factory_girl'
