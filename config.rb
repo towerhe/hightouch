@@ -21,6 +21,5 @@ use Rack::Codehighlighter,
 configure :build do; end
 
 ready do
-  generate_category_pages
-  generate_tag_pages
+  generate_archive_pages
 end
