@@ -1,6 +1,7 @@
-require 'pry'
+Bundler.require
+require 'i18n'
+require 'hightouch'
 
-require 'lib/hightouch'
 activate :hightouch
 
 Encoding.default_external = 'utf-8'

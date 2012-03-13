@@ -6,6 +6,7 @@ gem 'rack-codehighlighter'
 gem 'redcarpet'
 gem 'virtus'
 
+# Development dependencies
 gem 'pry'
 gem 'rspec'
 gem 'factory_girl'
