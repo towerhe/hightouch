@@ -34,8 +34,7 @@ module Hightouch
     end
 
     def blog_posting(path)
-      path.sub!(/^\//, "")
-      blog_postings[path]
+      blog_postings.values.select { |v| v.url == path }.first
     end
   end
 end
