@@ -2,3 +2,4 @@
 .rvmrc
 .sass-cache/
 build/
+hightouch-*.gem
