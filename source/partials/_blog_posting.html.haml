@@ -1,15 +1,14 @@
 - blog_posting = blog.blog_posting(current_path)
 
-- if blog_posting
-  .blog-posting
-    %h1= titleize(humanize(blog_posting.name))
-    %p
-      %span.author
-        %label Created by: 
-        = blog_posting.author
-      %span.date-created
-        %label Published on: 
-        = blog_posting.date_created
-    %p
-      = partial "partials/tags", locals: { tags: blog_posting.tags }
-    .article-body= blog_posting.article_body
+.blog-posting
+  %h1= titleize(humanize(blog_posting.name))
+  %p
+    %span.author
+      %label Created by: 
+      = blog_posting.author
+    %span.date-created
+      %label Published on: 
+      = blog_posting.date_created
+  %p
+    = partial "partials/tags", locals: { tags: blog_posting.tags }
+  .article-body= blog_posting.article_body

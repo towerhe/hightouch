@@ -40,14 +40,19 @@ module Hightouch
       update_archive(@date_created)
 
       @description = nil
-      @article_body = nil
+      @body = nil
     end
 
     def article_body
-      @article_body ||= begin
-                          body = page.render(layout: false)
-                          body.sub!(DESC_SEPARATOR, '')
-                        end
+      @body ||= begin
+                  body = page.render(layout: false)
+
+                  if body =~ DESC_SEPARATOR
+                    body.sub!(DESC_SEPARATOR, '')
+                  else
+                    body
+                  end
+                end
     end
 
     def description
