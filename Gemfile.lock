@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/middleman/middleman.git
-  revision: 3c78d9f171e44806165bf2a5c710b376a23bcd7b
+  revision: baa7d42d740ec073f6eb96c64dd60e39066e3760
   specs:
     middleman (3.0.0.beta.2)
       middleman-core (= 3.0.0.beta.2)
@@ -39,7 +39,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.2.0)
-    compass (0.12.0)
+    compass (0.12.1)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
