@@ -1,8 +1,8 @@
 module Hightouch
   module ArchivePageGenerator
     def generate_archive_page(archive)
-      page archive.path, proxy: "/templates/archive.html" do
-        @collection = archive.class.name.split(/::/).last.downcase.pluralize.to_sym
+      template_name = archive.class.name.split(/::/).last.downcase
+      page archive.path, proxy: "/templates/#{template_name}.html" do
         @archive_name = archive.name
       end
     end

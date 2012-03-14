@@ -1,0 +1,4 @@
+- blog.tags.each do |k, v|
+  - if k == @archive_name
+    - v.blog_postings.each do |url, p|
+      = partial "partials/blog_posting_summary", locals: { blog_posting: p }
