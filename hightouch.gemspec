@@ -22,5 +22,6 @@ Gem::Specification.new do |s|
   s.add_dependency "rack-codehighlighter", ">= 0.5.0"
   s.add_dependency "redcarpet", ">= 2.0.1"
   s.add_dependency "virtus", ">= 0.3.0"
+  s.add_dependency "octokit"
 
 end

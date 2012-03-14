@@ -1,7 +1,6 @@
 Bundler.require
-require 'i18n'
-require 'hightouch'
 
+require 'hightouch'
 activate :hightouch
 
 Encoding.default_external = 'utf-8'

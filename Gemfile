@@ -5,6 +5,8 @@ gem 'rygments'
 gem 'rack-codehighlighter'
 gem 'redcarpet'
 gem 'virtus'
+gem 'octokit'
+gem 'hightouch'
 
 # Development dependencies
 gem 'pry'
