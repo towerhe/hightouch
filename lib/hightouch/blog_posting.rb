@@ -77,7 +77,7 @@ module Hightouch
         a = association[u]
         next if a
 
-        a = blog.send(association_name)[u] || blog.send(:create_archive, type, name: u, blog: blog)
+        a = blog.find_archive(type, u) || blog.send(:create_archive, type, name: u, blog: blog)
 
         a.add_blog_posting(self)
         association[u] = a
@@ -88,7 +88,7 @@ module Hightouch
       name = date_created.strftime('%Y/%m')
       return if archive && archive.name == name
 
-      archive = blog.archives[name] || blog.create_archive(Archive, name: name, blog: blog)
+      archive = blog.find_archive(Archive, name) || blog.create_archive(Archive, name: name, blog: blog)
       archive.add_blog_posting(self)
     end
   end
