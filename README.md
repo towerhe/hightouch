@@ -7,17 +7,16 @@ inspired by
 
 # Install
 
-```:::ruby
+```ruby
 gem install hightouch
 ```
 
 # Usage
 
-```:::ruby
+```ruby
 hightouch new app_name # Or ht new app_name
 cd app_name
 bundle install
 middle
 ```
-
 
