@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/middleman/middleman.git
-  revision: baa7d42d740ec073f6eb96c64dd60e39066e3760
+  revision: f76883b53aec64cf583979d170f392c73d618765
   specs:
     middleman (3.0.0.beta.2)
       middleman-core (= 3.0.0.beta.2)
@@ -16,7 +16,7 @@ GIT
       tilt (~> 1.3.1)
     middleman-more (3.0.0.beta.2)
       coffee-script (~> 2.2.0)
-      compass (~> 0.12.0)
+      compass (~> 0.12.1)
       execjs (~> 1.2)
       haml (~> 3.1.0)
       middleman-core (= 3.0.0.beta.2)
